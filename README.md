@@ -1,58 +1,101 @@
-# Isotope Mass Calculator #
+# isotope-pattern-lib #
 
-The program computes the isotope pattern of a given molecular formula.
+The library can be used to compute the isotope pattern
+of a given molecular formula.
 
-## Program use ##
+## Requirements ##
 
+`python >= 3.7`
+
+## Usage ##
+
+Although any of the classes/functions can be used independently,
+the library has the main endpoints, located in
+`isotope_pattern_lib/api.py`:
 ```
-python -m <name> --config-file=<file> C6H12O6
+from isotope_pattern_lib import api
 ```
-
-## File ##
-
-mass  
-neutron mass = 1.0001  
-ratios = 90.0, 10.0
-
+---
 ```
-[
-  {
-    "name": "C",
-    "alias": "carbon",
-    "isotopes": [
-      {
-        "name": "C12",
-        "mass": 12.0,
-        "abundance": 98.93
-      },
-      {
-        "name": "C13",
-        "mass": 13.0,
-        "abundance": 0.07
-      }
-    ]
-  }
-]
+api.set_parser(config_path: str)
+```
+The call sets the parameters for parsing molecular formulas.
+These parameters should be listed as elements with their corresponding isotopes
+in a `yaml` file that is located in `config_path`.
+The structure of the file will be described later.
 
-elements:
-- name: C
-  alias: carbon
+The call is optional. If no call is conducted, a default parser is used.
+
+---
+```
+def compute_isotope_pattern(formula_string: str)
+```
+The call computes isotope pattern of a given molecular formula, represented
+as a string `formula_string` (_e.g._ `C2H5OH`).
+The output represents a list of `IsotopeFormula` instances, each containing
+the information on the constituent isotopes and the probability of the
+associated compositions.
+
+## YAML file structure ##
+
+The YAML file is used to define the way how molecular formulas will be parsed.
+It consists of a list of elements with the definition of the corresponding isotopes.
+Each entry has the following form:
+```
+- name: string
+  description: string
   isotopes:
-  - name: C12
-    mass: 12.0
-    abundance: 98.93
-  - name:
-- name:
+    - name: string
+      mass: float
+      abundance: float
+    - ...
+- ...
 ```
+**Comments**:
+
+- The field `name` is arbitrary, but the raw strings that are used in the
+`compute_isotope_pattern(formula_string: str)` call should not contain
+any element names that are not part of the `name` fields, specified in the
+`yaml` file.
+- Each element can contain as many isotopes as it is wished.
+- The field `abundance` should define a number less or equal to `1.0`.
+However, these numbers, corresponding to different isotopes of an element,
+  should not exceed in sum `1.0`.
+  
+## Default YAML file structure ##
 
 ```
-[C]
-C12 = 
-13 = 13.0
-[H]
-0 = 1.00
-1 = 2.00
-2 = 3.00
-[O]
-16 = 1.00
+- name: H
+  description: hydrogen
+  isotopes:
+    - name: H1
+      mass: 1.0078250
+      abundance: 1.000
+- name: C
+  description: carbon
+  isotopes:
+    - name: C12
+      mass: 12.0000000
+      abundance: 0.989
+    - name: C13
+      mass: 13.0033548
+      abundance: 0.011
+- name: O
+  description: oxygen
+  isotopes:
+    - name: O16
+      mass: 15.9949146
+      abundance: 0.998
+    - name: O18
+      mass: 17.9991596
+      abundance: 0.002
+- name: N
+  description: nytrogen
+  isotopes:
+    - name: N14
+      mass: 14.0030740
+      abundance: 0.996
+    - name: N15
+      mass: 15.0001089
+      abundance: 0.004
 ```
