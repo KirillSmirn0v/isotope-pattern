@@ -22,9 +22,9 @@ setuptools.setup(
     author_email='kirill.smirnov.mail@gmail.com',
     long_description=parse_description(),
     long_description_content_type='text/markdown',
-    url='https://github.com/KirillSmirn0v/isotope-pattern',
-    packages=setuptools.find_namespace_packages(include=['isopattern*']),
-    package_data={'isopattern': ['resources/config.yaml']},
+    url='https://github.com/ksmirn0v/isotope-pattern-lib',
+    packages=setuptools.find_namespace_packages(include=['isotope_pattern_lib*']),
+    package_data={'isotope_pattern_lib': ['resources/config.yaml']},
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Programming Language :: Python :: 3.7',
