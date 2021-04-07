@@ -1,0 +1,35 @@
+name: ci-pull-request
+env:
+  SONARCLOUD_PROJECT_STATUS_URL: https://sonarcloud.io/api/qualitygates/project_status
+on:
+  pull_request:
+    branches:
+      - master
+    types: [opened, edited, synchronize, reopened]
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: SonarCloud scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          SONAR_TOKEN: ${{secrets.SONARCLOUD_TOKEN}}
+        with:
+          args: >
+            -Dsonar.organization=${{secrets.SONARCLOUD_ORGANIZATION}}
+            -Dsonar.projectKey=${{secrets.SONARCLOUD_PROJECT_KEY}}
+      - name: SonarCloud quality gate retrieval
+        id: quality_gate
+        run: |
+          qualityGateResponse=$(curl --location --request GET '${{env.SONARCLOUD_PROJECT_STATUS_URL}}?pullRequest=${{github.event.pull_request.number}}&projectKey=${{secrets.SONARCLOUD_PROJECT_KEY}}')
+          echo "::set-output name=qualityGateResponse::$qualityGateResponse"
+      - name: SonarCloud quality gate evaluation
+        if: ${{fromJSON(steps.quality_gate.outputs.qualityGateResponse).projectStatus.status == 'ERROR'}}
+        run: |
+          echo "The quality gate was not passed"
+          exit 1
