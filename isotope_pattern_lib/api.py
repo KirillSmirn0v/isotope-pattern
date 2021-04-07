@@ -2,15 +2,15 @@ import os
 import pkg_resources
 from typing import List
 
-from isopattern.core import pattern
-from isopattern.core.parser import MolecularFormulaParser
-from isopattern.core.settings import Settings
-from isopattern.core.types import IsotopeFormula
+from isotope_pattern_lib.core import isotope_pattern
+from isotope_pattern_lib.core.formula_parser import MolecularFormulaParser
+from isotope_pattern_lib.types.settings import Settings
+from isotope_pattern_lib.types.types import IsotopeFormula
 
 
 parser = MolecularFormulaParser(
     settings=Settings.parse_from_file(pkg_resources.resource_filename(
-        'isopattern',
+        'isotope_pattern_lib',
         os.path.join('resources', 'config.yaml')
     ))
 )
@@ -28,4 +28,4 @@ def compute_isotope_pattern(formula_string: str) -> List[IsotopeFormula]:
     global parser
     formula = parser.parse(raw_string=formula_string)
 
-    return pattern.compute(formula=formula)
+    return isotope_pattern.compute_isotope_pattern(formula=formula)

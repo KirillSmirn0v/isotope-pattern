@@ -1,7 +1,7 @@
 import re
 
-from isopattern.core.settings import Settings
-from isopattern.core.types import MolecularFormula
+from isotope_pattern_lib.types.settings import Settings
+from isotope_pattern_lib.types.types import MolecularFormula
 
 
 class MolecularFormulaParser:

@@ -1,19 +1,20 @@
 import itertools
 from typing import (
-    List,
     FrozenSet,
+    List
 )
 
 from scipy.stats import multinomial
 
-from isopattern.core.types import (
+from isotope_pattern_lib.types.types import (
     Isotope,
     IsotopeFormula,
-    MolecularFormula,
+    MolecularFormula
 )
+from isotope_pattern_lib.utils import utils
 
 
-def compute(formula: MolecularFormula) -> List[IsotopeFormula]:
+def compute_isotope_pattern(formula: MolecularFormula) -> List[IsotopeFormula]:
 
     element_isotope_formulas = {}
     for element, count in formula.elements.items():
@@ -42,7 +43,7 @@ def compute_isotope_distributions(isotopes: FrozenSet[Isotope], element_count: i
     distribution = multinomial(n=element_count, p=[isotope.abundance for isotope in isotope_list])
 
     isotope_formulas = []
-    for array in generate_arrays_with_preserved_sum(total_sum=element_count, size=len(isotope_list)):
+    for array in utils.generate_arrays_with_preserved_sum(total_sum=element_count, size=len(isotope_list)):
         probability = distribution.pmf(array)
         isotope_counts = dict(zip(isotope_list, array))
         isotope_formulas.append(IsotopeFormula(
@@ -52,12 +53,3 @@ def compute_isotope_distributions(isotopes: FrozenSet[Isotope], element_count: i
         ))
 
     return isotope_formulas
-
-
-def generate_arrays_with_preserved_sum(total_sum: int, size: int) -> List[List[int]]:
-    if size == 1:
-        yield [total_sum]
-    else:
-        for i in range(total_sum + 1):
-            for j in generate_arrays_with_preserved_sum(total_sum=total_sum - i, size=size - 1):
-                yield [i] + j
