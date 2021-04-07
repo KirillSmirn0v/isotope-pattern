@@ -9,10 +9,10 @@
   isotopes:
     - name: C12
       mass: 12.0000000
-      abundance: 98.930
+      abundance: 0.989
     - name: C13
       mass: 13.0033548
-      abundance: 1.070
+      abundance: 0.011
 - name: O
   description: oxygen
   isotopes:

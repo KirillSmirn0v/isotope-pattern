@@ -1,6 +1,6 @@
 from typing import (
     Dict,
-    Set
+    FrozenSet
 )
 
 
@@ -28,7 +28,7 @@ class Isotope:
 
 class Element:
 
-    def __init__(self, name: str, isotopes: Set[Isotope]):
+    def __init__(self, name: str, isotopes: FrozenSet[Isotope]):
         self.name = name
         self.isotopes = isotopes
 
