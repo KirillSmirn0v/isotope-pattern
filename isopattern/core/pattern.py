@@ -1,7 +1,7 @@
 import itertools
 from typing import (
     List,
-    Set,
+    FrozenSet,
 )
 
 from scipy.stats import multinomial
@@ -19,7 +19,7 @@ def compute(formula: MolecularFormula) -> List[IsotopeFormula]:
     for element, count in formula.elements.items():
         element_isotope_formulas[element] = compute_isotope_distributions(element.isotopes, count)
 
-    for combination in itertools.product(element_isotope_formulas.values()):
+    for combination in itertools.product(*element_isotope_formulas.values()):
 
         name = ""
         counts = {}
@@ -36,7 +36,7 @@ def compute(formula: MolecularFormula) -> List[IsotopeFormula]:
         )
 
 
-def compute_isotope_distributions(isotopes: Set[Isotope], element_count: int) -> List[IsotopeFormula]:
+def compute_isotope_distributions(isotopes: FrozenSet[Isotope], element_count: int) -> List[IsotopeFormula]:
 
     isotope_list = list(isotopes)
     distribution = multinomial(n=element_count, p=[isotope.abundance for isotope in isotope_list])
@@ -44,10 +44,10 @@ def compute_isotope_distributions(isotopes: Set[Isotope], element_count: int) ->
     isotope_formulas = []
     for array in generate_arrays_with_preserved_sum(total_sum=element_count, size=len(isotope_list)):
         probability = distribution.pmf(array)
-        isotope_counts = zip(isotope_list, array)
+        isotope_counts = dict(zip(isotope_list, array))
         isotope_formulas.append(IsotopeFormula(
-            name="".join([f"{isotope.name}[{count}]" for isotope, count in isotope_counts]),
-            isotopes=dict(isotope_counts),
+            name="".join([f"{isotope.name}[{count}]" for isotope, count in isotope_counts.items()]),
+            isotopes=isotope_counts,
             probability=probability
         ))
 

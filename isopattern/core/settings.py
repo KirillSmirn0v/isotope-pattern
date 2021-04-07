@@ -1,4 +1,4 @@
-from typing import Set
+from typing import FrozenSet
 
 import yaml
 
@@ -10,7 +10,7 @@ from isopattern.core.types import (
 
 class Settings:
 
-    def __init__(self, elements: Set[Element]):
+    def __init__(self, elements: FrozenSet[Element]):
         self.elements = elements
 
     @classmethod
@@ -35,8 +35,8 @@ class Settings:
             elements.add(
                 Element(
                     name=raw_element['name'],
-                    isotopes=isotopes
+                    isotopes=frozenset(isotopes)
                 )
             )
 
-        return cls(elements=elements)
+        return cls(elements=frozenset(elements))
