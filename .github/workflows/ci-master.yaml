@@ -25,7 +25,7 @@ jobs:
       - name: SonarCloud quality gate retrieval
         id: quality_gate
         run: |
-          qualityGateResponse=$(curl --location --request GET '${{env.SONARCLOUD_PROJECT_STATUS_URL}}?branch=${{github.ref}}&projectKey=${{secrets.SONARCLOUD_PROJECT_KEY}}')
+          qualityGateResponse=$(curl --location --request GET '${{env.SONARCLOUD_PROJECT_STATUS_URL}}?branch=master&projectKey=${{secrets.SONARCLOUD_PROJECT_KEY}}')
           echo "::set-output name=qualityGateResponse::$qualityGateResponse"
       - name: SonarCloud quality gate evaluation
         if: ${{fromJSON(steps.quality_gate.outputs.qualityGateResponse).projectStatus.status == 'ERROR'}}
