@@ -28,4 +28,5 @@ def compute_isotope_pattern(formula_string: str) -> List[IsotopeFormula]:
     global parser
     formula = parser.parse(raw_string=formula_string)
 
-    return isotope_pattern.compute_isotope_pattern(formula=formula)
+    patterns = isotope_pattern.compute_isotope_pattern(formula=formula)
+    return sorted(patterns, key=lambda x: x.mass)

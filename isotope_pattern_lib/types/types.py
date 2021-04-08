@@ -70,6 +70,13 @@ class IsotopeFormula:
         self.name = name
         self.isotopes = isotopes
         self.probability = probability
+        self.mass = self.compute_mass()
+
+    def compute_mass(self) -> float:
+        mass = 0.0
+        for isotope, count in self.isotopes.items():
+            mass += isotope.mass * count
+        return mass
 
     def __eq__(self, other):
         if isinstance(other, IsotopeFormula):
