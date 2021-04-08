@@ -61,9 +61,6 @@ class MolecularFormula:
     def __ne__(self, other):
         return not self.__eq__(other)
 
-    def __hash__(self):
-        return hash((self.name, self.elements))
-
 
 class IsotopeFormula:
 
@@ -89,6 +86,3 @@ class IsotopeFormula:
 
     def __ne__(self, other):
         return not self.__eq__(other)
-
-    def __hash__(self):
-        return hash((self.name, self.isotopes, self.probability))
