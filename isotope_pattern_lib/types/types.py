@@ -1,6 +1,6 @@
 from typing import (
     Dict,
-    FrozenSet
+    List
 )
 
 
@@ -28,21 +28,22 @@ class Isotope:
 
 class Element:
 
-    def __init__(self, name: str, isotopes: FrozenSet[Isotope]):
+    def __init__(self, name: str, isotopes: List[Isotope]):
         self.name = name
         self.isotopes = isotopes
+        self._isotopes = frozenset(isotopes)
 
     def __eq__(self, other):
         if isinstance(other, Element):
             name_equality = (self.name == other.name)
-            isotopes_equality = (self.isotopes == other.isotopes)
+            isotopes_equality = (self._isotopes == other._isotopes)
             return name_equality and isotopes_equality
 
     def __ne__(self, other):
         return not self.__eq__(other)
 
     def __hash__(self):
-        return hash((self.name, self.isotopes))
+        return hash((self.name, self._isotopes))
 
 
 class MolecularFormula:

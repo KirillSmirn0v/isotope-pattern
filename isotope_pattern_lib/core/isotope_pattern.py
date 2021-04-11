@@ -1,8 +1,5 @@
 import itertools
-from typing import (
-    FrozenSet,
-    List
-)
+from typing import List
 
 from scipy.stats import multinomial
 
@@ -37,15 +34,14 @@ def compute_isotope_pattern(formula: MolecularFormula) -> List[IsotopeFormula]:
         )
 
 
-def compute_isotope_distributions(isotopes: FrozenSet[Isotope], element_count: int) -> List[IsotopeFormula]:
+def compute_isotope_distributions(isotopes: List[Isotope], element_count: int) -> List[IsotopeFormula]:
 
-    isotope_list = list(isotopes)
-    distribution = multinomial(n=element_count, p=[isotope.abundance for isotope in isotope_list])
+    distribution = multinomial(n=element_count, p=[isotope.abundance for isotope in isotopes])
 
     isotope_formulas = []
-    for array in utils.generate_arrays_with_preserved_sum(total_sum=element_count, size=len(isotope_list)):
+    for array in utils.generate_arrays_with_preserved_sum(total_sum=element_count, size=len(isotopes)):
         probability = distribution.pmf(array)
-        isotope_counts = dict(zip(isotope_list, array))
+        isotope_counts = dict(zip(isotopes, array))
         isotope_formulas.append(IsotopeFormula(
             name="".join([f"{isotope.name}[{count}]" for isotope, count in isotope_counts.items()]),
             isotopes=isotope_counts,
