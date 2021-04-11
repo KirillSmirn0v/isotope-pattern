@@ -30,18 +30,18 @@ class Settings:
             elements.add(
                 Element(
                     name=raw_element['name'],
-                    isotopes=frozenset(isotopes)
+                    isotopes=isotopes
                 )
             )
 
         return cls(elements=frozenset(elements))
 
     @staticmethod
-    def retrieve_isotopes(raw_isotopes: List[dict]) -> FrozenSet[Isotope]:
+    def retrieve_isotopes(raw_isotopes: List[dict]) -> List[Isotope]:
 
-        isotopes = set()
+        isotopes = list()
         for raw_isotope in raw_isotopes:
-            isotopes.add(
+            isotopes.append(
                 Isotope(
                     name=raw_isotope['name'],
                     mass=raw_isotope['mass'],
@@ -49,4 +49,4 @@ class Settings:
                 )
             )
 
-        return frozenset(isotopes)
+        return isotopes
