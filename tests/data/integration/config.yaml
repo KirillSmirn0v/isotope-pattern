@@ -1,0 +1,36 @@
+- name: H
+  description: hydrogen
+  isotopes:
+    - name: H1
+      mass: 1.0078250
+      abundance: 1.000
+- name: C
+  description: carbon
+  isotopes:
+    - name: C12
+      mass: 12.0000000
+      abundance: 0.989
+    - name: C13
+      mass: 13.0033548
+      abundance: 0.011
+- name: O
+  description: oxygen
+  isotopes:
+    - name: O16
+      mass: 15.9949146
+      abundance: 0.998
+    - name: O18
+      mass: 17.9991596
+      abundance: 0.002
+- name: S
+  description: sulfur
+  isotopes:
+    - name: S32
+      mass: 31.9720712
+      abundance: 0.950
+    - name: S33
+      mass: 32.9714589
+      abundance: 0.007
+    - name: S34
+      mass: 33.9678670
+      abundance: 0.043

@@ -1,0 +1,47 @@
+name: H2SO4
+isotope_formulas:
+  - name: H1[2]S32[1]S33[0]S34[0]O16[4]O18[0]
+    mass: 97.967
+    probability: 0.942
+  - name: H1[2]S32[0]S33[1]S34[0]O16[4]O18[0]
+    mass: 98.967
+    probability: 0.007
+  - name: H1[2]S32[0]S33[0]S34[1]O16[4]O18[0]
+    mass: 99.963
+    probability: 0.043
+  - name: H1[2]S32[1]S33[0]S34[0]O16[3]O18[1]
+    mass: 99.972
+    probability: 0.008
+  - name: H1[2]S32[0]S33[1]S34[0]O16[3]O18[1]
+    mass: 100.971
+    probability: 0.000
+  - name: H1[2]S32[0]S33[0]S34[1]O16[3]O18[1]
+    mass: 101.967
+    probability: 0.000
+  - name: H1[2]S32[1]S33[0]S34[0]O16[2]O18[2]
+    mass: 101.976
+    probability: 0.000
+  - name: H1[2]S32[0]S33[1]S34[0]O16[2]O18[2]
+    mass: 102.975
+    probability: 0.000
+  - name: H1[2]S32[0]S33[0]S34[1]O16[2]O18[2]
+    mass: 103.972
+    probability: 0.000
+  - name: H1[2]S32[1]S33[0]S34[0]O16[1]O18[3]
+    mass: 103.980
+    probability: 0.000
+  - name: H1[2]S32[0]S33[1]S34[0]O16[1]O18[3]
+    mass: 104.980
+    probability: 0.000
+  - name: H1[2]S32[0]S33[0]S34[1]O16[1]O18[3]
+    mass: 105.976
+    probability: 0.000
+  - name: H1[2]S32[1]S33[0]S34[0]O16[0]O18[4]
+    mass: 105.984
+    probability: 0.000
+  - name: H1[2]S32[0]S33[1]S34[0]O16[0]O18[4]
+    mass: 106.984
+    probability: 0.000
+  - name: H1[2]S32[0]S33[0]S34[1]O16[0]O18[4]
+    mass: 107.980
+    probability: 0.000

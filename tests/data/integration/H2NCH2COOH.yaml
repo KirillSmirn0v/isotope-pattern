@@ -1,0 +1,56 @@
+name: H2NCH2COOH
+isotope_formulas:
+  - name: H1[5]N14[1]N15[0]C12[2]C13[0]O16[2]O18[0]
+    mass: 75.032
+    probability: 0.970
+  - name: H1[5]N14[0]N15[1]C12[2]C13[0]O16[2]O18[0]
+    mass: 76.029
+    probability: 0.004
+  - name: H1[5]N14[1]N15[0]C12[1]C13[1]O16[2]O18[0]
+    mass: 76.035
+    probability: 0.022
+  - name: H1[5]N14[0]N15[1]C12[1]C13[1]O16[2]O18[0]
+    mass: 77.032
+    probability: 0.000
+  - name: H1[5]N14[1]N15[0]C12[2]C13[0]O16[1]O18[1]
+    mass: 77.036
+    probability: 0.004
+  - name: H1[5]N14[1]N15[0]C12[0]C13[2]O16[2]O18[0]
+    mass: 77.039
+    probability: 0.000
+  - name: H1[5]N14[0]N15[1]C12[2]C13[0]O16[1]O18[1]
+    mass: 78.033
+    probability: 0.000
+  - name: H1[5]N14[0]N15[1]C12[0]C13[2]O16[2]O18[0]
+    mass: 78.036
+    probability: 0.000
+  - name: H1[5]N14[1]N15[0]C12[1]C13[1]O16[1]O18[1]
+    mass: 78.040
+    probability: 0.000
+  - name: H1[5]N14[0]N15[1]C12[1]C13[1]O16[1]O18[1]
+    mass: 79.037
+    probability: 0.000
+  - name: H1[5]N14[1]N15[0]C12[2]C13[0]O16[0]O18[2]
+    mass: 79.041
+    probability: 0.000
+  - name: H1[5]N14[1]N15[0]C12[0]C13[2]O16[1]O18[1]
+    mass: 79.043
+    probability: 0.000
+  - name: H1[5]N14[0]N15[1]C12[2]C13[0]O16[0]O18[2]
+    mass: 80.038
+    probability: 0.000
+  - name: H1[5]N14[0]N15[1]C12[0]C13[2]O16[1]O18[1]
+    mass: 80.040
+    probability: 0.000
+  - name: H1[5]N14[1]N15[0]C12[1]C13[1]O16[0]O18[2]
+    mass: 80.044
+    probability: 0.000
+  - name: H1[5]N14[0]N15[1]C12[1]C13[1]O16[0]O18[2]
+    mass: 81.041
+    probability: 0.000
+  - name: H1[5]N14[1]N15[0]C12[0]C13[2]O16[0]O18[2]
+    mass: 81.047
+    probability: 0.000
+  - name: H1[5]N14[0]N15[1]C12[0]C13[2]O16[0]O18[2]
+    mass: 82.044
+    probability: 0.000

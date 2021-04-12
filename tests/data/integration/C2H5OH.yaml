@@ -1,0 +1,20 @@
+name: C2H5OH
+isotope_formulas:
+  - name: C12[2]C13[0]H1[6]O16[1]O18[0]
+    mass: 46.042
+    probability: 0.976
+  - name: C12[1]C13[1]H1[6]O16[1]O18[0]
+    mass: 47.045
+    probability: 0.022
+  - name: C12[2]C13[0]H1[6]O16[0]O18[1]
+    mass: 48.046
+    probability: 0.002
+  - name: C12[0]C13[2]H1[6]O16[1]O18[0]
+    mass: 48.049
+    probability: 0.000
+  - name: C12[1]C13[1]H1[6]O16[0]O18[1]
+    mass: 49.049
+    probability: 0.000
+  - name: C12[0]C13[2]H1[6]O16[0]O18[1]
+    mass: 50.053
+    probability: 0.000

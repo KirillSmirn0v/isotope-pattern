@@ -6,8 +6,11 @@ Feature: isotope-pattern-lib
     Then The resulting pattern corresponds to the one in "<file>"
 
     Examples:
-      | formula | file |
-      |         |      |
+      | formula    | file            |
+      | CO2        | CO2.yaml        |
+      | C2H5OH     | C2H5OH.yaml     |
+      | CH3CH2OH   | CH3CH2OH.yaml   |
+      | H2NCH2COOH | H2NCH2COOH.yaml |
 
   Scenario Outline: Should return correct pattern when settings are customized and molecular formula is provided
     Given Molecular "<formula>" as a raw string
@@ -16,5 +19,8 @@ Feature: isotope-pattern-lib
     Then The resulting pattern corresponds to the one in "<file>"
 
     Examples:
-      | formula | file |
-      |         |      |
+      | formula    | file            |
+      | CO2        | CO2.yaml        |
+      | C2H5OH     | C2H5OH.yaml     |
+      | CH3CH2OH   | CH3CH2OH.yaml   |
+      | H2SO4      | H2SO4.yaml      |
