@@ -7,22 +7,59 @@ on:
       - master
     types: [opened, edited, synchronize, reopened]
 jobs:
-  sonarcloud:
+  unit-tests:
     runs-on: ubuntu-16.04
     steps:
       - name: checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name: Python setup
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt -r requirements-test.txt
+      - name: running tests
+        run: |
+          python -m pytest tests/unit --cov=isotope_pattern_lib --cov-report=xml:./artifacts/test-report/unit/coverage-report.xml
+          cat ./artifacts/test-report/unit/coverage-report.xml
+      - name: saving artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report
+          path: ./artifacts
+  code-analysis:
+    needs: unit-tests
+    runs-on: ubuntu-16.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: loading artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: coverage-report
       - name: SonarCloud scan
-        uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           SONAR_TOKEN: ${{secrets.SONARCLOUD_TOKEN}}
-        with:
-          args: >
-            -Dsonar.organization=${{secrets.SONARCLOUD_ORGANIZATION}}
-            -Dsonar.projectKey=${{secrets.SONARCLOUD_PROJECT_KEY}}
+        run: |
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.4.0.2170-linux.zip
+          unzip ./sonar-scanner-cli-4.4.0.2170-linux.zip
+          rm ./sonar-scanner-cli-4.4.0.2170-linux.zip
+          mv ./sonar-scanner-4.4.0.2170-linux /opt
+          mv /opt/sonar-scanner-4.4.0.2170-linux /opt/sonar-scanner
+          /opt/sonar-scanner/bin/sonar-scanner \
+            -Dsonar.organization=${{secrets.SONARCLOUD_ORGANIZATION}} \
+            -Dsonar.projectKey=${{secrets.SONARCLOUD_PROJECT_KEY}} \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.pullrequest.key=${{github.event.pull_request.number}} \
+            -Dsonar.python.coverage.reportPaths=./test-report/unit/coverage-report.xml
       - name: SonarCloud quality gate retrieval
         id: quality_gate
         run: |
