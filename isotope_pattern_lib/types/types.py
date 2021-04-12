@@ -38,6 +38,7 @@ class Element:
             name_equality = (self.name == other.name)
             isotopes_equality = (self._isotopes == other._isotopes)
             return name_equality and isotopes_equality
+        return False
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -57,6 +58,7 @@ class MolecularFormula:
             name_equality = (self.name == other.name)
             elements_equality = (self.elements == other.elements)
             return name_equality and elements_equality
+        return False
 
     def __ne__(self, other):
         return not self.__eq__(other)
