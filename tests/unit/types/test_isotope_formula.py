@@ -137,3 +137,28 @@ def test__should_affirm_instance_inequality__when_comparison_with_another_class(
     assert formula != 1
     assert formula != 'str'
     assert formula != [1, 2, 3]
+
+
+@pytest.mark.parametrize('name,isotope_counts', formula_params)
+def test__should_return_correct_string__when_string_representation_is_invoked(
+    name: str,
+    isotope_counts: Dict[str, int]
+):
+
+    formula = IsotopeFormula(
+        name=name,
+        isotopes={
+            Isotope(
+                name=name,
+                mass=isotope_params[name][0],
+                abundance=isotope_params[name][1]
+            ): count for name, count in isotope_counts.items()
+        },
+        probability=0.25,
+    )
+
+    expected_string = (
+        f'IsotopeFormula'
+        f'(name={name}, mass={round(formula.mass, 3)}, probability={round(formula.probability, 3)})'
+    )
+    assert str(formula) == expected_string

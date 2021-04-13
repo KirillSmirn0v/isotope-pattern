@@ -100,3 +100,22 @@ def test__should_affirm_instance_inequality__when_comparison_with_another_class(
     assert formula != 1
     assert formula != 'str'
     assert formula != [1, 2, 3]
+
+
+@pytest.mark.parametrize('name,element_counts', formula_params)
+def test__should_return_correct_string__when_string_representation_is_invoked(
+    name: str,
+    element_counts: Dict[str, int]
+):
+
+    formula = MolecularFormula(
+        name=name,
+        elements={
+            Element(
+                name=name,
+                isotopes=[Isotope(name=name, mass=mass, abundance=abundance) for name, mass, abundance in element_params[name]]
+            ): count for name, count in element_counts.items()
+        }
+    )
+
+    assert str(formula) == f'MolecularFormula(name={name})'

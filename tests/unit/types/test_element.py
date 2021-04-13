@@ -70,3 +70,18 @@ def test__should_affirm_instance_inequality__when_comparison_with_another_class(
     assert element != 1
     assert element != 'str'
     assert element != [1, 2, 3]
+
+
+@pytest.mark.parametrize('name,isotopes', element_params)
+def test__should_return_correct_string__when_string_representation_is_invoked(
+    name: str,
+    isotopes: List[Tuple[str, float, float]]
+):
+
+    element = Element(
+        name=name,
+        isotopes=[Isotope(name=name, mass=mass, abundance=abundance) for name, mass, abundance in isotopes]
+    )
+
+    isotope_names = [isotope[0] for isotope in isotopes]
+    assert str(element) == f'Element(name={name}, isotopes={",".join(isotope_names)})'
