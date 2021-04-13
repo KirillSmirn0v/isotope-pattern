@@ -36,3 +36,17 @@ def test__should_affirm_instance_inequality__when_isotope_instances_have_differe
 
     assert isotope1 != isotope2
     assert hash(isotope1) != hash(isotope2)
+
+
+@pytest.mark.parametrize('name,mass,abundance', isotope_params)
+def test__should_affirm_instance_inequality__when_comparison_with_another_class(
+    name: str,
+    mass: float,
+    abundance: float
+):
+
+    isotope = Isotope(name=name, mass=mass, abundance=abundance)
+
+    assert isotope != 1
+    assert isotope != 'str'
+    assert isotope != [1, 2, 3]

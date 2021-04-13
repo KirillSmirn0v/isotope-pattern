@@ -114,3 +114,26 @@ def test__should_affirm_instance_inequality__when_isotope_formula_instances_have
     )
 
     assert formula1 != formula2
+
+
+@pytest.mark.parametrize('name,isotope_counts', formula_params)
+def test__should_affirm_instance_inequality__when_comparison_with_another_class(
+    name: str,
+    isotope_counts: Dict[str, int]
+):
+
+    formula = IsotopeFormula(
+        name=name,
+        isotopes={
+            Isotope(
+                name=name,
+                mass=isotope_params[name][0],
+                abundance=isotope_params[name][1]
+            ): count for name, count in isotope_counts.items()
+        },
+        probability=0.0,
+    )
+
+    assert formula != 1
+    assert formula != 'str'
+    assert formula != [1, 2, 3]
