@@ -54,3 +54,19 @@ def test__should_affirm_instance_inequality__when_element_instances_have_differe
 
     assert element1 != element2
     assert hash(element1) != hash(element2)
+
+
+@pytest.mark.parametrize('name,isotopes', element_params)
+def test__should_affirm_instance_inequality__when_comparison_with_another_class(
+    name: str,
+    isotopes: List[Tuple[str, float, float]]
+):
+
+    element = Element(
+        name=name,
+        isotopes=[Isotope(name=name, mass=mass, abundance=abundance) for name, mass, abundance in isotopes]
+    )
+
+    assert element != 1
+    assert element != 'str'
+    assert element != [1, 2, 3]

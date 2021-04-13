@@ -1,0 +1,20 @@
+name: CO2
+isotope_formulas:
+  - name: C12[1]C13[0]O16[2]O18[0]
+    mass: 43.990
+    probability: 0.985
+  - name: C12[0]C13[1]O16[2]O18[0]
+    mass: 44.993
+    probability: 0.011
+  - name: C12[1]C13[0]O16[1]O18[1]
+    mass: 45.994
+    probability: 0.004
+  - name: C12[0]C13[1]O16[1]O18[1]
+    mass: 46.997
+    probability: 0.000
+  - name: C12[1]C13[0]O16[0]O18[2]
+    mass: 47.998
+    probability: 0.000
+  - name: C12[0]C13[1]O16[0]O18[2]
+    mass: 49.002
+    probability: 0.000
