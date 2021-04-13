@@ -11,6 +11,12 @@ class Isotope:
         self.mass = mass
         self.abundance = abundance
 
+    def __repr__(self):
+        return (
+            f'{self.__class__.__name__}'
+            f'(name={self.name}, mass={round(self.mass, 3)}, abundance={round(self.abundance, 3)})'
+        )
+
     def __eq__(self, other):
         if isinstance(other, Isotope):
             name_equality = (self.name == other.name)
@@ -33,6 +39,10 @@ class Element:
         self.isotopes = isotopes
         self._isotopes = frozenset(isotopes)
 
+    def __repr__(self):
+        isotope_names = [isotope.name for isotope in self.isotopes]
+        return f'{self.__class__.__name__}(name={self.name}, isotopes={",".join(isotope_names)})'
+
     def __eq__(self, other):
         if isinstance(other, Element):
             name_equality = (self.name == other.name)
@@ -53,6 +63,9 @@ class MolecularFormula:
         self.name = name
         self.elements = elements
 
+    def __repr__(self):
+        return f'{self.__class__.__name__}(name={self.name})'
+
     def __eq__(self, other):
         if isinstance(other, MolecularFormula):
             name_equality = (self.name == other.name)
@@ -71,6 +84,12 @@ class IsotopeFormula:
         self.isotopes = isotopes
         self.probability = probability
         self.mass = self.compute_mass()
+
+    def __repr__(self):
+        return (
+            f'{self.__class__.__name__}'
+            f'(name={self.name}, mass={round(self.mass, 3)}, probability={round(self.probability, 3)})'
+        )
 
     def compute_mass(self) -> float:
         mass = 0.0

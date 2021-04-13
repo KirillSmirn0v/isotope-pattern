@@ -50,3 +50,15 @@ def test__should_affirm_instance_inequality__when_comparison_with_another_class(
     assert isotope != 1
     assert isotope != 'str'
     assert isotope != [1, 2, 3]
+
+
+@pytest.mark.parametrize('name,mass,abundance', isotope_params)
+def test__should_return_correct_string__when_string_representation_is_invoked(
+    name: str,
+    mass: float,
+    abundance: float
+):
+
+    isotope = Isotope(name=name, mass=mass, abundance=abundance)
+
+    assert str(isotope) == f'Isotope(name={name}, mass={round(mass, 3)}, abundance={round(abundance, 3)})'
