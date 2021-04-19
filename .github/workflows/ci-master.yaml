@@ -61,7 +61,8 @@ jobs:
             -Dsonar.sources=. \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.python.coverage.reportPaths=test-report/**/coverage-report.xml \
-            -Dsonar.exclusions=test-report/**
+            -Dsonar.exclusions=test-report/** \
+            -Dsonar.branch.name=master
       - name: SonarCloud quality gate retrieval
         id: quality_gate
         run: |
